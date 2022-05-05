@@ -11,6 +11,9 @@ local_settings.py
 db.sqlite3
 media
 
+# SQLite
+src/db.sqlite
+
 ### Linux ###
 *~
 

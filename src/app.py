@@ -100,28 +100,28 @@ class TwoFactorForm(FlaskForm):
 
 
 def _get_twilio_verify_client():
-    return Client(current_app.config['TWILIO_ACCOUNT_SID'], current_app.config['TWILIO_AUTH_TOKEN'])
+    return Client(os.environ["TWILIO_ACCOUNT_SID"], os.environ["TWILIO_AUTH_TOKEN"])
 
 
 def request_sms_verification_token(phone):
     client = _get_twilio_verify_client()
-    client.verify.services(current_app.config['TWILIO_SMS_VERIFY_SERVICE_ID']).verifications.create(to=phone, channel="sms")
+    client.verify.services(os.environ["TWILIO_SMS_VERIFY_SERVICE_ID"]).verifications.create(to=phone, channel="sms")
 
 
 def check_sms_verification_token(phone, token):
     client = _get_twilio_verify_client()
-    result = client.verify.services(current_app.config['TWILIO_SMS_VERIFY_SERVICE_ID']).verification_checks.create(to=phone, code=token)
+    result = client.verify.services(os.environ["TWILIO_SMS_VERIFY_SERVICE_ID"]).verification_checks.create(to=phone, code=token)
     return result.status
 
 
 def request_email_verification_token(email):
     client = _get_twilio_verify_client()
-    client.verify.services(current_app.config['TWILIO_EMAIL_VERIFY_SERVICE_ID']).verifications.create(to=email, channel="email")
+    client.verify.services(os.environ["TWILIO_EMAIL_VERIFY_SERVICE_ID"]).verifications.create(to=email, channel="email")
 
 
 def check_email_verification_token(email, token):
     client = _get_twilio_verify_client()
-    result = client.verify.services(current_app.config['TWILIO_EMAIL_VERIFY_SERVICE_ID']).verification_checks.create(to=email, code=token)
+    result = client.verify.services(os.environ["TWILIO_EMAIL_VERIFY_SERVICE_ID"]).verification_checks.create(to=email, code=token)
     return result.status
 
 
