@@ -94,11 +94,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-class TwoFactorForm(FlaskForm):
-    auth_type = SelectField("Type of 2FA", choices=[("SMS", "SMS"), ("Email", "Email"), ("QR Code/Hardware Token", "QR Code/Hardware Token")])
-    submit = SubmitField("Submit")
-
-
 def _get_twilio_verify_client():
     return Client(os.environ["TWILIO_ACCOUNT_SID"], os.environ["TWILIO_AUTH_TOKEN"])
 
